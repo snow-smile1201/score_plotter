@@ -5,6 +5,7 @@ class CreateResults < ActiveRecord::Migration[6.1]
       t.float :personality
       t.float :self_image
       t.float :communication
+      t.float :achievement_skill
       t.float :thinking_ability
       t.float :basic_score
       t.integer :times
@@ -15,5 +16,6 @@ class CreateResults < ActiveRecord::Migration[6.1]
       t.float :mvp_percentage
       t.timestamps
     end
+    add_foreign_key :results, :students, column: :student_id, primary_key: :student_number
   end
 end

@@ -1,2 +1,5 @@
-<h1>Results#index</h1>
-<p>Find me in app/views/results/index.html.erb</p>
+<% @results.each do |result| %>
+  <div class=""> <%= result.student.student_number %>:<%= result.student.name %>,<%= result.student.grade %>,<%= result.student.admission_date %><%= result.student.is_active%></div>
+  <div class="result">愛される人格：<%= result.personality %>信念セルフイメージ：<%= result.self_image %>コミュニケーション能力：<%= result.communication %>目標達成スキル：<%= result.achievement_skill %>考える力：<%= result.thinking_ability %>基礎点：<%= result.basic_score %></div><br>
+  <div class="result">クラス順位：<%= result.class_rank %>学年順位：<%= result.grade_rank %>MVP率：<%= result.mvp_percentage %></div>
+<% end %>

@@ -1,6 +1,7 @@
 class CreateStudents < ActiveRecord::Migration[6.1]
   def change
-    create_table :students, primary_key: :student_number, autoincrement: false do |t|
+    create_table :students, id: false do |t|
+      t.integer :student_number, null: false, primary_key: true
       t.string :name
       t.string :class_type
       t.string :group

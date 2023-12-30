@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2023_12_28_022438) do
     t.float "personality"
     t.float "self_image"
     t.float "communication"
+    t.float "achievement_skill"
     t.float "thinking_ability"
     t.float "basic_score"
     t.integer "times"
@@ -41,4 +42,5 @@ ActiveRecord::Schema.define(version: 2023_12_28_022438) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "results", "students", primary_key: "student_number"
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'results/index'
+  get 'results/index' => 'results#index'
   get 'results/show'
   get 'students/index' => 'students#index'
   get 'students/show'
