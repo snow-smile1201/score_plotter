@@ -1,3 +1,8 @@
 <% @student.each do |student| %>
-  <div class=""> <%= student.student_number %>:<%= student.name %>,<%= student.grade %>,<%= student.admission_date %><%= student.is_active%></div>
+  <div class=""> 
+    <%= student.student_number %>:
+      <%= link_to student_path(student_number: student.id) do %>
+        <%= student.name %>,
+      <% end %>
+    <%= student.grade %>,<%= student.admission_date %><%= student.is_active%></div>
 <% end %>

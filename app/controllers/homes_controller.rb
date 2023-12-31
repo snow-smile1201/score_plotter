@@ -11,8 +11,10 @@ class HomesController < ApplicationController
 
         student = Student.find_by(student_number: row['塾生番号']) || Student.new(imported_student_params(row))
         student.save
-        result = Result.new(imported_result_params(row))
-        result.student_id = student.id
+        student.result = Result.new(imported_result_params(row))
+        #result.student_idにはstudent.id（主キーに設定したstudent_number）が代入される
+        student.result.student_id = student.id
+        #result.timesはランクアップ実施のタイミングで変更する。
         result.times = 5
         result.save
       end
@@ -35,12 +37,12 @@ private
 
   def imported_result_params(row)
     params = {
-      personality: row['愛される人格'],
-      self_image: row['信念セルフイメージ'],
-      communication: row['コミュニケーション能力'],
-      achievement_skill: row['目標達成スキル'],
-      thinking_ability: row['考える力'],
-      basic_score: row['基礎点'],
+      personality: row['【点数】愛される人格'],
+      self_image: row['【点数】信念セルフイメージ'],
+      communication: row['【点数】コミュニケーション能力'],
+      achievement_skill: row['【点数】目標達成能力'],
+      thinking_ability: row['【点数】考える力'],
+      basic_score: row['【点数】基礎点'],
       class_rank: row['クラス順位'].to_i,
       grade_rank: row['学年順位'].to_i,
       weekly_achievement: row['週間達成数'].to_i,
