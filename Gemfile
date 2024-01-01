@@ -56,3 +56,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'roo'
 gem 'pry-rails'
+gem 'jquery-rails'
+gem 'chart-js-rails'
+gem 'gon'

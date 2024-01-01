@@ -1,2 +1,38 @@
-<h1>Students#show</h1>
-<p>Find me in app/views/students/show.html.erb</p>
+<%= @student.name %>
+
+<canvas id="RaderChart"></canvas>
+  <script>
+    $(document).on('turbolinks:load', function(){
+      var ctx = document.getElementById("RaderChart"); 
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+          datasets: [{ 
+                      label: '成績',
+                      backgroundColor: "rgba(0,0,0,01)",
+                      borderColor: "rgba(0,0,80,0)",
+                      data: [
+                              <%= @result.basic_score %>,
+                              <%= @result.personality %>,
+                              <%= @result.communication %>,
+                              <%= @result.achievement_skill %>,
+                              <%= @result.thinking_ability %>
+                      ],
+            }],
+      },
+      options: {
+      scale: {
+      pointLabels: {
+      fontColor: "black"
+      },
+      ticks: {
+      min: 0,
+      max: 100,
+      stepSize: 20
+      }
+      }
+      }
+      });
+      });
+  </script>
