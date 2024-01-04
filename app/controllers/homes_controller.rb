@@ -14,8 +14,8 @@ class HomesController < ApplicationController
         student.result = Result.new(imported_result_params(row))
         #result.student_idにはstudent.id（主キーに設定したstudent_number）が代入される
         student.result.student_id = student.id
-        #result.timesはランクアップ実施のタイミングで変更する。
-        result.times = 5
+        #result.timesは実施のタイミングで変更する。
+        result.times = params[:result][:times]
         result.save
       end
       redirect_to request.referer

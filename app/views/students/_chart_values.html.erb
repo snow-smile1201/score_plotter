@@ -1,0 +1,47 @@
+const type = 'line';
+let data = {
+  labels: ['2022/7','2022/11','2023/3','2023/7','2023/11'],
+  datasets: [
+    {
+  label: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  data: <%= @scores_per_time[0] %>,
+  backgroundColor: "rgba(10,0,0,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+    },
+    {
+  label: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  data: <%= @scores_per_time[1] %>,
+  backgroundColor: "rgba(0,10,0,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+    },
+    {
+  label: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  data: <%= @scores_per_time[2] %>,
+  backgroundColor: "rgba(0,0,10,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+    },
+    {
+  label: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  data: <%= @scores_per_time[3] %>,
+  backgroundColor: "rgba(10,10,0,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+    },
+    {
+  label: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  data: <%= @scores_per_time[4] %>,
+  backgroundColor: "rgba(10,0,10,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+    }
+  ]
+};
+
+let options = {
+};
+
+const ctx = document.getElementById("lineChart").getContext("2d");
+
+const lineChart = new Chart(ctx, {
+  type: type,
+  data: data,
+  options: options
+});

@@ -1,0 +1,35 @@
+const type = 'radar';
+let data = {
+  labels: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  datasets: [{
+  label: '成績',
+  data: <%= scores %>,
+  backgroundColor: "rgba(10,10,10,0.4)",
+  borderColor: "rgba(0,0,0,1)",
+  }]
+};
+
+let options = {
+  scales: {
+    r: {
+      beginAtZero: true,
+      min: 0,
+      max: 100,
+      ticks: {
+        stepSize: 20,
+      },
+      pointLabels: {
+        fontSize: 16,
+        fontColor: "black"
+      }
+    },
+  }
+};
+
+const ctx = document.getElementById("raderChart").getContext("2d");
+
+const raderChart = new Chart(ctx, {
+  type: type,
+  data: data,
+  options: options
+});

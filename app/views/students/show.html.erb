@@ -1,38 +1,54 @@
-<%= @student.name %>
+<div class="container p-1">
+  <div class="row">
+    <div class="col">
+      <%= @student.name %>さん<%= @student.grade %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>入塾時期</td>
+            <td><%= @student.admission_date %></td>
+          </tr>
+          <tr>
+            <td>在籍クラス</td>
+            <td><%= @student.class_type %></td>
+          </tr>
+          <tr>
+            <td>クラス順位</td>
+            <td><%= @latest_result.class_rank %>位</td>
+          </tr>
+          <tr>
+            <td>学年順位</td>
+            <td><%= @latest_result.grade_rank %>位</td>
+          </tr>
+          <tr>
+            <td>MVP率</td>
+            <td><%= @latest_result.mvp_percentage %>％</td>
+          </tr>
+          <tr>
+            <td>週間目標達成回数</td>
+            <td><%= @latest_result.weekly_achievement %>回　/34回</td>
+          </tr>
+          <tr>
+            <td>月間目標達成回数</td>
+            <td><%= @latest_result.monthly_achievement %>回　/8回</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <canvas id="raderChart"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    <canvas id="lineChart"></canvas>
+    </div>
+  </div>
+</div>
 
-<canvas id="RaderChart"></canvas>
-  <script>
-    $(document).on('turbolinks:load', function(){
-      var ctx = document.getElementById("RaderChart"); 
-      var myChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-          labels: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
-          datasets: [{ 
-                      label: '成績',
-                      backgroundColor: "rgba(0,0,0,01)",
-                      borderColor: "rgba(0,0,80,0)",
-                      data: [
-                              <%= @result.basic_score %>,
-                              <%= @result.personality %>,
-                              <%= @result.communication %>,
-                              <%= @result.achievement_skill %>,
-                              <%= @result.thinking_ability %>
-                      ],
-            }],
-      },
-      options: {
-      scale: {
-      pointLabels: {
-      fontColor: "black"
-      },
-      ticks: {
-      min: 0,
-      max: 100,
-      stepSize: 20
-      }
-      }
-      }
-      });
-      });
-  </script>
+# <script class="rader_chart_values">
+#   <%= render "rader_values", scores: @latest_scores %>   
+# </script>
+<script class="chart_values">
+  <%= render "chart_values", scores: @scores %>   
+</script>

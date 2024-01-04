@@ -1,4 +1,6 @@
 <%= form_with url: homes_top_path do |f| %>
   <%= f.file_field(:upload_file) %>
+  <%= f.label :times, "実施回数" %>
+  <%= f.number_field, :times %>
   <%= f.submit "import" %>
 <% end %>
