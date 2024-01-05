@@ -1,4 +1,5 @@
-<div class="container p-1">
+<div class="container p-0 my-3 mx-auto">
+  <%= link_to "PDF", student_path(format: :pdf, id: @student) %>
   <div class="row">
     <div class="col">
       <%= @student.name %>さん<%= @student.grade %>
@@ -46,9 +47,9 @@
   </div>
 </div>
 
-# <script class="rader_chart_values">
-#   <%= render "rader_values", scores: @latest_scores %>   
-# </script>
+<script class="rader_chart_values">
+  <%= render "rader_values", scores: @latest_scores %>   
+</script>
 <script class="chart_values">
-  <%= render "chart_values", scores: @scores %>   
+  <%= render "chart_values", times: @times, scores_basic: @scores_basic, scores_personality: @scores_personality, scores_communication: @scores_communication, scores_self_image: @scores_self_image, scores_achievement_skill: @scores_achievement_skill, scores_thinking_ability: @scores_thinking_ability %>   
 </script>
