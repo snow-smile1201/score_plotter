@@ -10,9 +10,10 @@
     "@rails/webpacker": "5.4.4",
     "bootstrap": "4.6.2",
     "chart.js": "^4.4.1",
-    "chartkick": "^5.0.1",
+    "chartkick": "^3.2.1",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
+    "puppeteer": "^21.7.0",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"

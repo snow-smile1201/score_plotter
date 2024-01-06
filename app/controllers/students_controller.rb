@@ -4,14 +4,6 @@ class StudentsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "Post_file", #ファイル名は後ほど変更
-              template: "students/show.html.erb",
-              encoding: 'UTF-8'
-      end
-    end
     @times = Result.maximum('times').to_i
     @student = Student.find_by!(student_number: params[:student_number])
     @latest_result = @student.results.where(times: @times).first
@@ -48,5 +40,12 @@ class StudentsController < ApplicationController
       @scores_achievement_skill << score_ac
       @scores_thinking_ability << score_th
     end
+    #TODO:config/application.rb内のrequire pupperteer削除、ここから下を削除、gemfile内のgemアンインストール
+    #@url = request.base_url + "/students/#{@student.student_number}"
+    #browser = Puppeteer.launch(headless: "new")
+    #@file_name = "test"
+    #File.open("#{Rails.root}/public/#{@file_name}.pdf", "w+b") << @pdf
+    #redirect_to "/#{@file_name}.pdf"
+    #browser.close
   end
 end

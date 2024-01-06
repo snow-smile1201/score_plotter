@@ -1,5 +1,4 @@
 <div class="container p-0 my-3 mx-auto">
-  <%= link_to "PDF", student_path(format: :pdf, id: @student) %>
   <div class="row">
     <div class="col">
       <%= @student.name %>さん<%= @student.grade %>
@@ -36,13 +35,13 @@
         </tbody>
       </table>
     </div>
-    <div class="col">
-      <canvas id="raderChart"></canvas>
+    <div class="col" style="width:500px; height:500px;">
+      <canvas id="raderChart" style="width:500px; height:500px;"></canvas>
     </div>
   </div>
   <div class="row">
-    <div class="col">
-    <canvas id="lineChart"></canvas>
+    <div class="col" style="width:1000px; height:400px;">
+    <canvas id="lineChart" style="width:1000px; height:500px;"></canvas>
     </div>
   </div>
 </div>
