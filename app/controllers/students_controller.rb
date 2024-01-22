@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   def index
-    @student = Student.all
+    @students = Student.all
   end
 
   def show
@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     @student = Student.find_by!(student_number: params[:student_number])
     @latest_result = @student.results.where(times: @times).first
     @latest_scores = [@latest_result&.basic_score, @latest_result&.personality, @latest_result&.self_image, @latest_result&.communication, @latest_result&.achievement_skill, @latest_result&.thinking_ability]
-   
+  
     @scores_basic = []
     @scores_personality = []
     @scores_self_image = []
@@ -40,12 +40,8 @@ class StudentsController < ApplicationController
       @scores_achievement_skill << score_ac
       @scores_thinking_ability << score_th
     end
-    #TODO:config/application.rb内のrequire pupperteer削除、ここから下を削除、gemfile内のgemアンインストール
-    #@url = request.base_url + "/students/#{@student.student_number}"
-    #browser = Puppeteer.launch(headless: "new")
-    #@file_name = "test"
-    #File.open("#{Rails.root}/public/#{@file_name}.pdf", "w+b") << @pdf
-    #redirect_to "/#{@file_name}.pdf"
-    #browser.close
+    html = render_to_string({template: 'students/show',layout: 'layouts/pdf',})
+    pdf = Grover.new(html).to_pdf
+    send_data(pdf, filename: "#{@student.student_number}_#{@student.name}(2024年3月).pdf", type: 'application/pdf')
   end
 end
