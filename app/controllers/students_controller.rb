@@ -40,8 +40,13 @@ class StudentsController < ApplicationController
       @scores_achievement_skill << score_ac
       @scores_thinking_ability << score_th
     end
-    html = render_to_string({template: 'students/show',layout: 'layouts/pdf',})
+    html = ApplicationController.new.render_to_string(template: 'students/showpdf',layout: 'layouts/pdf',locals: { student: @student, latest_result: @latest_result, scores: @latest_scores, times: @times, scores_basic: @scores_basic, scores_personality: @scores_personality, scores_communication: @scores_communication, scores_self_image: @scores_self_image, scores_achievement_skill: @scores_achievement_skill, scores_thinking_ability: @scores_thinking_ability })
     pdf = Grover.new(html).to_pdf
-    send_data(pdf, filename: "#{@student.student_number}_#{@student.name}(2024年3月).pdf", type: 'application/pdf')
+    respond_to do |format|
+      format.html
+      format.pdf do
+        send_data(pdf, filename: "#{@student.student_number}_#{@student.name}(2024年3月).pdf", type: 'application/pdf')
+      end
+    end
   end
 end

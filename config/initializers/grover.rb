@@ -2,7 +2,12 @@
 
 Grover.configure do |config|
   config.options = {
+    display_url: "http://localhost:3000",
+    print_background: true,
     format: 'A4',
+    width: '4093px',
+    height: '2894px',
+    landscape: true,
     margin: {
       top: '30px',
       right: '20px',

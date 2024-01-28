@@ -1,0 +1,155 @@
+<meta http-equiv="content-language" content="ja" charset="utf-8">
+<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<div class="container p-0 my-3 mx-auto">
+  <div class="row">
+    <div class="col" style="width:50%; height:50%">
+      <%= student.name %>さん<%= student.grade %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>入塾時期</td>
+            <td><%= student.admission_date %></td>
+          </tr>
+          <tr>
+            <td>在籍クラス</td>
+            <td><%= student.class_type %></td>
+          </tr>
+          <tr>
+            <td>クラス順位</td>
+            <td><%= latest_result.class_rank %>位</td>
+          </tr>
+          <tr>
+            <td>学年順位</td>
+            <td><%= latest_result.grade_rank %>位</td>
+          </tr>
+          <tr>
+            <td>MVP率</td>
+            <td><%= latest_result.mvp_percentage %>％</td>
+          </tr>
+          <tr>
+            <td>週間目標達成回数</td>
+            <td><%= latest_result.weekly_achievement %>回　/34回</td>
+          </tr>
+          <tr>
+            <td>月間目標達成回数</td>
+            <td><%= latest_result.monthly_achievement %>回　/8回</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col w-100 h-100">
+      <canvas id="raderChart"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col w-100 h-50">
+    <canvas id="lineChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script class="rader_chart_values">
+const type = 'radar';
+let data = {
+  labels: ["基礎点", "愛される人格", "信念・セルフイメージ", "コミュニケーション能力", "目標達成スキル", "考える力"],
+  datasets: [{
+  label: '成績',
+  data: <%= scores %>,
+  backgroundColor: "rgba(255,255,0,0.4)",
+  borderColor: "rgba(255,255,0,0.4)",
+  }]
+};
+
+let options = {
+  animation: false,
+  scales: {
+    r: {
+      beginAtZero: true,
+      min: 0,
+      max: 100,
+      ticks: {
+        stepSize: 20,
+      },
+      pointLabels: {
+        fontSize: 16,
+        fontColor: "black"
+      }
+    },
+  }
+};
+
+const ctx = document.getElementById("raderChart").getContext("2d");
+
+const raderChart = new Chart(ctx, {
+  type: type,
+  data: data,
+  options: options
+});   
+</script>
+<script class="chart_values">
+const line_type = 'line';
+let line_labels = Array.from({ length: <%= times %> }, (_, i) => i + 1); 
+let line_datasets = [{
+    label: '基礎点',
+    data: <%= scores_basic %>,
+    borderColor: 'rgb(128, 128, 128)',
+    fill: false
+  },
+  {
+    label: '愛される人格',
+    data: <%= scores_personality %>,
+    borderColor: 'rgb(255, 0, 0)',
+    fill: false
+  },
+  {
+    label: '信念・セルフイメージ',
+    data: <%= scores_self_image %>,
+    borderColor: 'rgb(0, 0, 255)',
+    fill: false
+  },
+  {
+    label: 'コミュニケーション能力',
+    data: <%= scores_communication %>,
+    borderColor: 'rgb(255, 255, 0)',
+    fill: false
+  },
+  {
+    label: '目標達成スキル',
+    data: <%= scores_achievement_skill %>,
+    borderColor: 'rgb(0, 255, 0)',
+    fill: false
+  },
+  {
+    label: '考える力',
+    data: <%= scores_thinking_ability %>,
+    borderColor: 'rgb(128, 0, 128)',
+    fill: false
+  }];
+
+
+let line_options = {
+  animation: false,
+  scales: {
+    y: {
+      suggestedMin: 0,
+      max: 100,
+      ticks: {
+        stepSize: 20,
+      }
+    }
+  }
+};
+
+const line_ctx = document.getElementById("lineChart").getContext("2d");
+
+const lineChart = new Chart(line_ctx, {
+  type: line_type,
+  data: {
+    labels: line_labels,
+    datasets: line_datasets
+  },
+  options: line_options
+});   
+</script>
